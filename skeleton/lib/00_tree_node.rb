@@ -24,6 +24,36 @@ class PolyTreeNode
     end
     parent.children.push(self)
   end
+
+  def add_child(child_node)
+    child_node.parent=(self)
+  end
+
+  def remove_child(child_node)
+    child_node.parent=(nil)
+    raise "This is not a child" if !children.include?(child_node)
+  end
+
+  def dfs(target_value)
+    return nil if self.value != target_value
+    return self if self.value == target_value
+    children.each do |child|
+      dfs(child)
+    end
+  end
+
+  def bfs(target_value)
+    queue = []
+    queue.push(self)
+    until queue.empty?
+      node = queue.shift
+      return node if node.value == target_value
+      node.children.each do |child|
+        queue.push(child)
+      end
+    end 
+  end
+
 end
 
 # n1 = PolyTreeNode.new("root1")
