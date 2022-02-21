@@ -12,7 +12,13 @@ class KnightPathFinder
   end
 
   def self.valid_moves(pos)
-    
+    arr = []
+    MOVES.each do |move|
+      if (move[0]+pos[0]) <= 7 && (move[1]+pos[1]) <= 7 && (move[0]+pos[0]) > -1 && (move[1]+pos[1]) > -1
+        arr << [move[0]+pos[0], move[1]+pos[1]]
+      end
+    end
+    arr
   end
 
   def new_move_positions(pos)
@@ -21,6 +27,14 @@ class KnightPathFinder
     new_moves
   end
 
-
+  def build_move_tree
+    queue = []
+    queue.push(root_node)
+    until queue.empty?
+      node = queue.shift
+      nodes_pos = new_move_positions(node.value)
+      nodes_pos.each do |pos|
+    end
+  end
 
 end
